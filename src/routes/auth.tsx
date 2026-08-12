@@ -1,6 +1,7 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { claimOwner } from "@/lib/admin.functions";
 import "@/admin.css";
 
 export const Route = createFileRoute("/auth")({
