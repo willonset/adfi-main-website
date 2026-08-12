@@ -531,8 +531,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 .sea-map__panel li { position: relative; padding-left: 14px; font-size: 13px; line-height: 18px; color: var(--ink); }
 .sea-map__panel li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
   border-radius: 50%; background: var(--red); }
-.hero-map.sea-map-host { pointer-events: none; aspect-ratio: 16 / 9; z-index: 5; }
-.about-hero-map.sea-map-host { aspect-ratio: 16 / 9; z-index: 5; }
+.hero-map.sea-map-host { pointer-events: none; aspect-ratio: 1038 / 820; z-index: 5; }
+.about-hero-map.sea-map-host { aspect-ratio: 1038 / 820; z-index: 5; }
 @media (max-width: 900px) {
   .sea-map__panel { min-width: 150px; padding: 10px 12px; }
   .sea-map__panel li { font-size: 11px; line-height: 15px; }
