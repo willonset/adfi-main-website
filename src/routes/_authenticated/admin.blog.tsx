@@ -299,22 +299,21 @@ function BlogAdminPage() {
               </div>
             </div>
 
-            <div className="admin-field" style={{ marginTop: 14 }}>
-              <label>Nội dung (VI) — dùng "## Tiêu đề" và "- gạch đầu dòng"</label>
-              <textarea
-                className="admin-textarea tall"
+            <div style={{ marginTop: 14 }}>
+              <RichEditor
+                label="Nội dung (VI)"
                 value={draft.body_vi}
-                onChange={(e) => setDraft({ ...draft, body_vi: e.target.value })}
+                onChange={(html) => setDraft((d) => (d ? { ...d, body_vi: html } : d))}
               />
             </div>
-            <div className="admin-field" style={{ marginTop: 14 }}>
-              <label>Nội dung (EN)</label>
-              <textarea
-                className="admin-textarea tall"
+            <div style={{ marginTop: 14 }}>
+              <RichEditor
+                label="Nội dung (EN)"
                 value={draft.body_en}
-                onChange={(e) => setDraft({ ...draft, body_en: e.target.value })}
+                onChange={(html) => setDraft((d) => (d ? { ...d, body_en: html } : d))}
               />
             </div>
+
 
             {error ? <p className="admin-error">{error}</p> : null}
             <div className="admin-modal-actions">
