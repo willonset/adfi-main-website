@@ -16,6 +16,7 @@ import { Route as BrandRouteImport } from './routes/brand'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as TuyenDungRouteImport } from './routes/tuyen-dung'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAdvertiserRouteImport } from './routes/en.advertiser'
@@ -57,6 +58,11 @@ const MarketplaceRoute = MarketplaceRouteImport.update({
 const TuyenDungRoute = TuyenDungRouteImport.update({
   id: '/tuyen-dung',
   path: '/tuyen-dung',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnIndexRoute = EnIndexRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog/'
     | '/en/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog'
     | '/en'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog/'
     | '/en/'
   fileRoutesById: FileRoutesById
 }
@@ -209,6 +221,7 @@ export interface RootRouteChildren {
   EnCareersRoute: typeof EnCareersRoute
   EnCreatorRoute: typeof EnCreatorRoute
   EnMarketplaceRoute: typeof EnMarketplaceRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/tuyen-dung'
       fullPath: '/tuyen-dung'
       preLoaderRoute: typeof TuyenDungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/': {
@@ -329,6 +349,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnCareersRoute: EnCareersRoute,
   EnCreatorRoute: EnCreatorRoute,
   EnMarketplaceRoute: EnMarketplaceRoute,
+  BlogIndexRoute: BlogIndexRoute,
   EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
