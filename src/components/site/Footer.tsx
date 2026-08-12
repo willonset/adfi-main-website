@@ -96,7 +96,7 @@ export function Footer({ lang }: { lang: Lang }) {
                   <SiteLink to={routes.careers[lang]}>{t("footer.careers")}</SiteLink>
                 </li>
                 <li>
-                  <a href="#">{t("footer.blog")}</a>
+                  <SiteLink to={routes.blog[lang]}>{t("footer.blog")}</SiteLink>
                 </li>
                 <li>
                   <a href="#contact">{t("footer.support")}</a>
