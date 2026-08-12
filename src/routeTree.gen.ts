@@ -17,6 +17,7 @@ import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as TuyenDungRouteImport } from './routes/tuyen-dung'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAdvertiserRouteImport } from './routes/en.advertiser'
@@ -65,6 +66,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnIndexRoute = EnIndexRouteImport.update({
   id: '/en/',
   path: '/en/',
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   CreatorRoute: typeof CreatorRoute
   MarketplaceRoute: typeof MarketplaceRoute
   TuyenDungRoute: typeof TuyenDungRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   EnAboutRoute: typeof EnAboutRoute
   EnAdvertiserRoute: typeof EnAdvertiserRoute
   EnBrandRoute: typeof EnBrandRoute
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/': {
       id: '/en/'
       path: '/en'
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreatorRoute: CreatorRoute,
   MarketplaceRoute: MarketplaceRoute,
   TuyenDungRoute: TuyenDungRoute,
+  BlogSlugRoute: BlogSlugRoute,
   EnAboutRoute: EnAboutRoute,
   EnAdvertiserRoute: EnAdvertiserRoute,
   EnBrandRoute: EnBrandRoute,
