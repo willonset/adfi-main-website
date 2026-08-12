@@ -42,6 +42,7 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    console.log("[seamap] effect", !!root.querySelector("img.hero-map"));
     const img = root.querySelector<HTMLImageElement>(
       "img.hero-map, img.about-hero-map",
     );
