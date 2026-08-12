@@ -134,11 +134,15 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
 
   if (!html) return null;
   return (
-    <div
-      ref={rootRef}
-      onClick={onClick}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <>
+      <div
+        ref={rootRef}
+        onClick={onClick}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+      {mapHost ? createPortal(<SeaMap lang={lang} />, mapHost) : null}
+    </>
   );
+
 }
 
