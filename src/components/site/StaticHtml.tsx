@@ -1,5 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { SeaMap } from "./SeaMap";
 import { assets } from "@/lib/assets";
 import viPages from "@/content/pages-vi.json";
 import enPages from "@/content/pages-en.json";
@@ -21,9 +23,10 @@ export function getPageContent(lang: Lang, page: string): Section {
  * Renders the ported static markup and keeps internal anchor clicks on the
  * client router instead of triggering a full page reload.
  */
-export function StaticHtml({ html }: { html: string }) {
+export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang }) {
   const navigate = useNavigate();
   const rootRef = useRef<HTMLDivElement>(null);
+
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const anchor = (e.target as HTMLElement).closest("a");
@@ -35,9 +38,34 @@ export function StaticHtml({ html }: { html: string }) {
     [navigate],
   );
 
+  // Swap the static map image for the interactive map. A dedicated React root
+  // is used so the surrounding innerHTML container never has to re-render.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const img = root.querySelector<HTMLImageElement>(
+      "img.hero-map, img.about-hero-map",
+    );
+    if (!img) return;
+    const host = document.createElement("div");
+    host.className = `${img.className} sea-map-host`;
+    img.replaceWith(host);
+    let reactRoot: Root | null = createRoot(host);
+    reactRoot.render(<SeaMap lang={lang} />);
+    return () => {
+      const r = reactRoot;
+      reactRoot = null;
+      setTimeout(() => r?.unmount(), 0);
+      if (host.parentNode) host.replaceWith(img);
+    };
+  }, [html, lang]);
+
+
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
     const figure = root.querySelector<HTMLElement>(".team-photo");
     const img = figure?.querySelector("img");
     const dots = root.querySelector<HTMLElement>(".team-dots");
@@ -115,5 +143,6 @@ export function StaticHtml({ html }: { html: string }) {
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
+
 }
 
