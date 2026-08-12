@@ -10,33 +10,206 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdvertiserRouteImport } from './routes/advertiser'
+import { Route as BrandRouteImport } from './routes/brand'
+import { Route as CreatorRouteImport } from './routes/creator'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as TuyenDungRouteImport } from './routes/tuyen-dung'
+import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as EnAboutRouteImport } from './routes/en.about'
+import { Route as EnAdvertiserRouteImport } from './routes/en.advertiser'
+import { Route as EnBrandRouteImport } from './routes/en.brand'
+import { Route as EnCareersRouteImport } from './routes/en.careers'
+import { Route as EnCreatorRouteImport } from './routes/en.creator'
+import { Route as EnMarketplaceRouteImport } from './routes/en.marketplace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdvertiserRoute = AdvertiserRouteImport.update({
+  id: '/advertiser',
+  path: '/advertiser',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandRoute = BrandRouteImport.update({
+  id: '/brand',
+  path: '/brand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorRoute = CreatorRouteImport.update({
+  id: '/creator',
+  path: '/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TuyenDungRoute = TuyenDungRouteImport.update({
+  id: '/tuyen-dung',
+  path: '/tuyen-dung',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en/',
+  path: '/en/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAboutRoute = EnAboutRouteImport.update({
+  id: '/en/about',
+  path: '/en/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAdvertiserRoute = EnAdvertiserRouteImport.update({
+  id: '/en/advertiser',
+  path: '/en/advertiser',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnBrandRoute = EnBrandRouteImport.update({
+  id: '/en/brand',
+  path: '/en/brand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnCareersRoute = EnCareersRouteImport.update({
+  id: '/en/careers',
+  path: '/en/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnCreatorRoute = EnCreatorRouteImport.update({
+  id: '/en/creator',
+  path: '/en/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnMarketplaceRoute = EnMarketplaceRouteImport.update({
+  id: '/en/marketplace',
+  path: '/en/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/advertiser': typeof AdvertiserRoute
+  '/brand': typeof BrandRoute
+  '/creator': typeof CreatorRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/tuyen-dung': typeof TuyenDungRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/advertiser': typeof EnAdvertiserRoute
+  '/en/brand': typeof EnBrandRoute
+  '/en/careers': typeof EnCareersRoute
+  '/en/creator': typeof EnCreatorRoute
+  '/en/marketplace': typeof EnMarketplaceRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/advertiser': typeof AdvertiserRoute
+  '/brand': typeof BrandRoute
+  '/creator': typeof CreatorRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/tuyen-dung': typeof TuyenDungRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/advertiser': typeof EnAdvertiserRoute
+  '/en/brand': typeof EnBrandRoute
+  '/en/careers': typeof EnCareersRoute
+  '/en/creator': typeof EnCreatorRoute
+  '/en/marketplace': typeof EnMarketplaceRoute
+  '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/advertiser': typeof AdvertiserRoute
+  '/brand': typeof BrandRoute
+  '/creator': typeof CreatorRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/tuyen-dung': typeof TuyenDungRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/advertiser': typeof EnAdvertiserRoute
+  '/en/brand': typeof EnBrandRoute
+  '/en/careers': typeof EnCareersRoute
+  '/en/creator': typeof EnCreatorRoute
+  '/en/marketplace': typeof EnMarketplaceRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/advertiser'
+    | '/brand'
+    | '/creator'
+    | '/marketplace'
+    | '/tuyen-dung'
+    | '/en/about'
+    | '/en/advertiser'
+    | '/en/brand'
+    | '/en/careers'
+    | '/en/creator'
+    | '/en/marketplace'
+    | '/en/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/advertiser'
+    | '/brand'
+    | '/creator'
+    | '/marketplace'
+    | '/tuyen-dung'
+    | '/en/about'
+    | '/en/advertiser'
+    | '/en/brand'
+    | '/en/careers'
+    | '/en/creator'
+    | '/en/marketplace'
+    | '/en'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/advertiser'
+    | '/brand'
+    | '/creator'
+    | '/marketplace'
+    | '/tuyen-dung'
+    | '/en/about'
+    | '/en/advertiser'
+    | '/en/brand'
+    | '/en/careers'
+    | '/en/creator'
+    | '/en/marketplace'
+    | '/en/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdvertiserRoute: typeof AdvertiserRoute
+  BrandRoute: typeof BrandRoute
+  CreatorRoute: typeof CreatorRoute
+  MarketplaceRoute: typeof MarketplaceRoute
+  TuyenDungRoute: typeof TuyenDungRoute
+  EnAboutRoute: typeof EnAboutRoute
+  EnAdvertiserRoute: typeof EnAdvertiserRoute
+  EnBrandRoute: typeof EnBrandRoute
+  EnCareersRoute: typeof EnCareersRoute
+  EnCreatorRoute: typeof EnCreatorRoute
+  EnMarketplaceRoute: typeof EnMarketplaceRoute
+  EnIndexRoute: typeof EnIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +221,115 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advertiser': {
+      id: '/advertiser'
+      path: '/advertiser'
+      fullPath: '/advertiser'
+      preLoaderRoute: typeof AdvertiserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brand': {
+      id: '/brand'
+      path: '/brand'
+      fullPath: '/brand'
+      preLoaderRoute: typeof BrandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creator': {
+      id: '/creator'
+      path: '/creator'
+      fullPath: '/creator'
+      preLoaderRoute: typeof CreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tuyen-dung': {
+      id: '/tuyen-dung'
+      path: '/tuyen-dung'
+      fullPath: '/tuyen-dung'
+      preLoaderRoute: typeof TuyenDungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/en'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/about': {
+      id: '/en/about'
+      path: '/en/about'
+      fullPath: '/en/about'
+      preLoaderRoute: typeof EnAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/advertiser': {
+      id: '/en/advertiser'
+      path: '/en/advertiser'
+      fullPath: '/en/advertiser'
+      preLoaderRoute: typeof EnAdvertiserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/brand': {
+      id: '/en/brand'
+      path: '/en/brand'
+      fullPath: '/en/brand'
+      preLoaderRoute: typeof EnBrandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/careers': {
+      id: '/en/careers'
+      path: '/en/careers'
+      fullPath: '/en/careers'
+      preLoaderRoute: typeof EnCareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/creator': {
+      id: '/en/creator'
+      path: '/en/creator'
+      fullPath: '/en/creator'
+      preLoaderRoute: typeof EnCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/marketplace': {
+      id: '/en/marketplace'
+      path: '/en/marketplace'
+      fullPath: '/en/marketplace'
+      preLoaderRoute: typeof EnMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdvertiserRoute: AdvertiserRoute,
+  BrandRoute: BrandRoute,
+  CreatorRoute: CreatorRoute,
+  MarketplaceRoute: MarketplaceRoute,
+  TuyenDungRoute: TuyenDungRoute,
+  EnAboutRoute: EnAboutRoute,
+  EnAdvertiserRoute: EnAdvertiserRoute,
+  EnBrandRoute: EnBrandRoute,
+  EnCareersRoute: EnCareersRoute,
+  EnCreatorRoute: EnCreatorRoute,
+  EnMarketplaceRoute: EnMarketplaceRoute,
+  EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
