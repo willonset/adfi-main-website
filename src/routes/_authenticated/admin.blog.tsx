@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { RichEditor, toEditorHtml } from "@/components/admin/RichEditor";
 import { supabase } from "@/integrations/supabase/client";
+
 
 export const Route = createFileRoute("/_authenticated/admin/blog")({
   head: () => ({
@@ -186,7 +188,17 @@ function BlogAdminPage() {
                   </td>
                   <td>
                     <div className="row-actions">
-                      <button className="admin-btn ghost sm" onClick={() => setDraft({ ...r })}>
+                      <button
+                        className="admin-btn ghost sm"
+                        onClick={() =>
+                          setDraft({
+                            ...r,
+                            body_vi: toEditorHtml(r.body_vi),
+                            body_en: toEditorHtml(r.body_en),
+                          })
+                        }
+                      >
+
                         Sửa
                       </button>
                       <button className="admin-btn ghost sm" onClick={() => void togglePublish(r)}>
