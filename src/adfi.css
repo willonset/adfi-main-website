@@ -332,9 +332,22 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 /* team photo */
 .team-photo { margin: 0; border-radius: 20px; overflow: hidden; }
 .team-photo img { width: 100%; display: block; }
+.team-photo--slider { position: relative; }
+.team-photo--slider img { transition: opacity .3s ease; }
+.team-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px;
+  display: grid; place-items: center; border: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(255,255,255,.9); color: var(--red); box-shadow: 0 6px 20px rgba(0,0,0,.15);
+  transition: background .2s ease, transform .2s ease; }
+.team-nav:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+.team-nav svg { width: 22px; height: 22px; }
+.team-nav--prev { left: 16px; }
+.team-nav--next { right: 16px; }
 .team-dots { display: flex; gap: 10px; justify-content: center; margin-top: 24px; }
-.team-dots span { width: 12px; height: 12px; border-radius: 50%; background: var(--red-tertiary-bg); }
-.team-dots span:first-child { background: var(--red); }
+.team-dots span, .team-dots button { width: 12px; height: 12px; padding: 0; border: 0; border-radius: 50%;
+  background: var(--red-tertiary-bg); cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.team-dots span:first-child, .team-dots button.is-active { background: var(--red); }
+.team-dots button.is-active { transform: scale(1.15); }
+
 
 /* ---------- Commission tables (advertiser) ---------- */
 .commission-section { position: relative; }
