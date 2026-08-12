@@ -23,9 +23,11 @@ export function getPageContent(lang: Lang, page: string): Section {
  * Renders the ported static markup and keeps internal anchor clicks on the
  * client router instead of triggering a full page reload.
  */
-export function StaticHtml({ html }: { html: string }) {
+export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang }) {
   const navigate = useNavigate();
   const rootRef = useRef<HTMLDivElement>(null);
+  const [mapHost, setMapHost] = useState<HTMLElement | null>(null);
+
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const anchor = (e.target as HTMLElement).closest("a");
