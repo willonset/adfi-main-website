@@ -1,4 +1,5 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
+import { SiteLink } from "./SiteLink";
 import { useEffect, useState } from "react";
 import { assets } from "@/lib/assets";
 import { type Lang, type PageKey, routes, makeT, switchLangPath } from "@/i18n";
@@ -33,30 +34,30 @@ export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
 
   const langSwitch = (
     <div className="lang-switch">
-      <Link to={switchLangPath(pathname, "vi")} className={lang === "vi" ? "active" : ""}>
+      <SiteLink to={switchLangPath(pathname, "vi")} className={lang === "vi" ? "active" : ""}>
         VI
-      </Link>
-      <Link to={switchLangPath(pathname, "en")} className={lang === "en" ? "active" : ""}>
+      </SiteLink>
+      <SiteLink to={switchLangPath(pathname, "en")} className={lang === "en" ? "active" : ""}>
         EN
-      </Link>
+      </SiteLink>
     </div>
   );
 
   return (
     <header className="site-header">
       <div className="wrap-header">
-        <Link className="logo" to={routes.home[lang]}>
+        <SiteLink className="logo" to={routes.home[lang]}>
           <img src={assets.logoDark} alt="ADFI" />
-        </Link>
+        </SiteLink>
         <nav className="nav-pill">
           {NAV.map((item) => (
-            <Link
+            <SiteLink
               key={item.key}
               to={routes[item.key][lang]}
               className={isActive(item.key) ? "active" : ""}
             >
               {t(item.label)}
-            </Link>
+            </SiteLink>
           ))}
         </nav>
         <div className="header-actions">
@@ -79,13 +80,13 @@ export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
       <div className="mobile-menu">
         <nav>
           {NAV.map((item) => (
-            <Link
+            <SiteLink
               key={item.key}
               to={routes[item.key][lang]}
               className={isActive(item.key) ? "active" : ""}
             >
               {t(item.label)}
-            </Link>
+            </SiteLink>
           ))}
         </nav>
         {langSwitch}
