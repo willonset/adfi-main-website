@@ -44,7 +44,7 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
     let host: HTMLElement | null = null;
     let img: HTMLImageElement | null = null;
     // Wait a frame so hydration has finished before mutating the injected markup.
-    const raf = requestAnimationFrame(() => {
+    const raf = window.setTimeout(() => {
       const root = rootRef.current;
       console.log("[seamap] raf", !!root);
       if (!root) return;
@@ -57,9 +57,9 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
       host.className = `${img.className} sea-map-host`;
       img.replaceWith(host);
       setMapHost(host);
-    });
+    }, 800);
     return () => {
-      cancelAnimationFrame(raf);
+      clearTimeout(raf);
       setMapHost(null);
       if (host && img && host.parentNode) host.replaceWith(img);
     };
