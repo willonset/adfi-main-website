@@ -504,9 +504,9 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 }
 
 /* ---------- Interactive Southeast Asia map ---------- */
-.sea-map { position: relative; pointer-events: auto; }
+.sea-map { position: relative; pointer-events: none; }
 .sea-map__img { width: 100%; height: 100%; display: block; object-fit: contain; }
-.sea-map__hit { position: absolute; padding: 0; border: 0; background: transparent;
+.sea-map__hit { position: absolute; pointer-events: auto; padding: 0; border: 0; background: transparent;
   border-radius: 40%; cursor: pointer; z-index: 3; }
 .sea-map__hit:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .sea-map__hit.is-active { background: rgba(236,34,31,.14); }
@@ -527,8 +527,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 .sea-map__panel li { position: relative; padding-left: 14px; font-size: 13px; line-height: 18px; color: var(--ink); }
 .sea-map__panel li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
   border-radius: 50%; background: var(--red); }
-.hero-map.sea-map-host { pointer-events: auto; aspect-ratio: 16 / 9; }
-.about-hero-map.sea-map-host { aspect-ratio: 16 / 9; }
+.hero-map.sea-map-host { pointer-events: none; aspect-ratio: 16 / 9; z-index: 5; }
+.about-hero-map.sea-map-host { aspect-ratio: 16 / 9; z-index: 5; }
 @media (max-width: 900px) {
   .sea-map__panel { min-width: 150px; padding: 10px 12px; }
   .sea-map__panel li { font-size: 11px; line-height: 15px; }
