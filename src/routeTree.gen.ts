@@ -28,6 +28,7 @@ import { Route as EnCareersRouteImport } from './routes/en.careers'
 import { Route as EnCreatorRouteImport } from './routes/en.creator'
 import { Route as EnMarketplaceRouteImport } from './routes/en.marketplace'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin.customers'
 import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
 
@@ -125,6 +126,12 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminCustomersRoute =
+  AuthenticatedAdminCustomersRouteImport.update({
+    id: '/admin/customers',
+    path: '/admin/customers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
   id: '/en/blog/',
   path: '/en/blog/',
@@ -154,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -176,6 +184,7 @@ export interface FileRoutesByTo {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/en/blog': typeof EnBlogIndexRoute
@@ -200,6 +209,7 @@ export interface FileRoutesById {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog/'
     | '/en/'
+    | '/admin/customers'
     | '/en/blog/$slug'
     | '/admin/'
     | '/en/blog/'
@@ -246,6 +257,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog'
     | '/en'
+    | '/admin/customers'
     | '/en/blog/$slug'
     | '/admin'
     | '/en/blog'
@@ -269,6 +281,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog/'
     | '/en/'
+    | '/_authenticated/admin/customers'
     | '/en/blog/$slug'
     | '/_authenticated/admin/'
     | '/en/blog/'
@@ -432,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/customers': {
+      id: '/_authenticated/admin/customers'
+      path: '/admin/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/en/blog/': {
       id: '/en/blog/'
       path: '/en/blog'
@@ -450,10 +470,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminCustomersRoute: typeof AuthenticatedAdminCustomersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminCustomersRoute: AuthenticatedAdminCustomersRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
