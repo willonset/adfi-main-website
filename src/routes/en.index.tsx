@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StaticPage } from "@/components/site/StaticPage";
 
-export const Route = createFileRoute("/en")({
+export const Route = createFileRoute("/en/")({
   head: () => ({
     meta: [
       { title: "ADFI — Southeast Asia Affiliate Marketing Ecosystem" },
