@@ -40,26 +40,28 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
   );
 
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    console.log("[seamap] effect");
-    const img = root.querySelector<HTMLImageElement>(
-      "img.hero-map, img.about-hero-map",
-    );
-    if (!img) {
-      setMapHost(null);
-      return;
-    }
-    const host = document.createElement("div");
-    host.className = `${img.className} sea-map-host`;
-    img.replaceWith(host);
-    setMapHost(host);
+    let host: HTMLElement | null = null;
+    let img: HTMLImageElement | null = null;
+    // Wait a frame so hydration has finished before mutating the injected markup.
+    const raf = requestAnimationFrame(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      img = root.querySelector<HTMLImageElement>(
+        "img.hero-map, img.about-hero-map",
+      );
+      if (!img) return;
+      host = document.createElement("div");
+      host.className = `${img.className} sea-map-host`;
+      img.replaceWith(host);
+      setMapHost(host);
+    });
     return () => {
-      console.log("[seamap] cleanup");
+      cancelAnimationFrame(raf);
       setMapHost(null);
-      host.replaceWith(img);
+      if (host && img && host.parentNode) host.replaceWith(img);
     };
   }, [html]);
+
 
   useEffect(() => {
     const root = rootRef.current;
