@@ -22,7 +22,11 @@ export function pick(post: PublicPost, field: "title" | "excerpt" | "body" | "ca
 }
 
 function Body({ text }: { text: string }) {
+  if (/<(p|h[1-6]|ul|ol|div|img|blockquote)\b/i.test(text)) {
+    return <div className="post-body" dangerouslySetInnerHTML={{ __html: text }} />;
+  }
   const blocks = text.split("\n\n");
+
   return (
     <div className="post-body">
       {blocks.map((block, i) => {

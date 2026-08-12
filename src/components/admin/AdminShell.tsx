@@ -1,10 +1,42 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
+import { Moon, Sun } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRole } from "./useRole";
 import { assets } from "@/lib/assets";
 import "@/admin.css";
+
+export function AdminThemeToggle() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const saved = (localStorage.getItem("adfi-admin-theme") as "dark" | "light" | null) ?? "dark";
+    setTheme(saved);
+    document.documentElement.setAttribute("data-admin-theme", saved);
+    return () => document.documentElement.removeAttribute("data-admin-theme");
+  }, []);
+
+  function toggle() {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    localStorage.setItem("adfi-admin-theme", next);
+    document.documentElement.setAttribute("data-admin-theme", next);
+  }
+
+  return (
+    <button
+      type="button"
+      className="theme-toggle"
+      onClick={toggle}
+      title={theme === "dark" ? "Chuyển giao diện sáng" : "Chuyển giao diện tối"}
+      aria-label="Đổi giao diện sáng/tối"
+    >
+      {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+    </button>
+  );
+}
+
 
 const NAV: { to: string; label: string; exact?: boolean }[] = [
   { to: "/admin", label: "Tổng quan", exact: true },
