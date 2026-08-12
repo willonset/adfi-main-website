@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { type Lang, makeT } from "@/i18n";
+import { supabase } from "@/integrations/supabase/client";
+
 
 const LEAD_URL =
   "https://script.google.com/macros/s/AKfycby76ZkWV2aOAbUA-h7q-mx2LRNKW964plIHBVpl2sZepZzM_8kw3xcAADnB7jNJv43n/exec";
