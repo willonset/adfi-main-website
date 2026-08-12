@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { SeaMap } from "./SeaMap";
 import { assets } from "@/lib/assets";
 import viPages from "@/content/pages-vi.json";
+console.log("[seamap] module loaded");
 import enPages from "@/content/pages-en.json";
 import type { Lang } from "@/i18n";
 
