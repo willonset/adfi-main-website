@@ -3,9 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "./SiteLayout";
 import { type Lang, makeT, SOURCE_OPTIONS } from "@/i18n";
 
-const APPLY_URL =
-  "https://script.google.com/macros/s/AKfycby76ZkWV2aOAbUA-h7q-mx2LRNKW964plIHBVpl2sZepZzM_8kw3xcAADnB7jNJv43n/exec";
-
 const DEPARTMENTS = ["Sales", "Marketing", "Digital", "Logistic", "E-commerce", "Hành chính văn phòng"];
 const DEPARTMENT_EN: Record<string, string> = {
   Sales: "Sales",
@@ -378,34 +375,31 @@ function ApplyModal({ job, lang, onClose }: { job: Job; lang: Lang; onClose: () 
     setSending(true);
     setStatus(null);
     try {
-      const base64 = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result).split(",")[1] ?? "");
-        reader.onerror = () => reject(new Error("read"));
-        reader.readAsDataURL(file);
+      const website = String(data.get("website") ?? "");
+      if (website) return; // honeypot
+      const ext = file.name.split(".").pop()?.toLowerCase() ?? "pdf";
+      const path = `${job.slug}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const upload = await supabase.storage.from("cvs").upload(path, file, {
+        contentType: file.type || "application/octet-stream",
+        upsert: false,
       });
-      const payload = {
-        type: "application",
-        jobSlug: job.slug,
+      if (upload.error) throw upload.error;
+
+      const { error } = await supabase.from("job_applications").insert({
+        job_id: job.id,
         position: lang === "vi" ? job.title_vi : job.title_en,
-        department: job.department,
         fullname: String(data.get("fullname") ?? "").trim(),
         email: String(data.get("email") ?? "").trim(),
         phone: String(data.get("phone") ?? "").trim(),
         intro: String(data.get("intro") ?? "").trim(),
-        sources: [...sources, other.trim()].filter(Boolean).join(", "),
-        fileName: file.name,
-        fileType: file.type,
-        fileBase64: base64,
-        website: String(data.get("website") ?? ""),
-      };
-      const res = await fetch(APPLY_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
+        sources,
+        source_other: other.trim(),
+        cv_path: path,
+        cv_filename: file.name,
+        lang,
       });
-      const json = (await res.json()) as { ok?: boolean };
-      if (!json?.ok) throw new Error("server");
+      if (error) throw error;
+
       setStatus({ kind: "ok", text: t("apply.ok") });
       form.reset();
       setFile(null);
@@ -416,6 +410,7 @@ function ApplyModal({ job, lang, onClose }: { job: Job; lang: Lang; onClose: () 
     } finally {
       setSending(false);
     }
+
   }
 
   return (

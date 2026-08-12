@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { type Lang, makeT } from "@/i18n";
+import { supabase } from "@/integrations/supabase/client";
+
 
 const LEAD_URL =
   "https://script.google.com/macros/s/AKfycby76ZkWV2aOAbUA-h7q-mx2LRNKW964plIHBVpl2sZepZzM_8kw3xcAADnB7jNJv43n/exec";
@@ -28,16 +30,26 @@ export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: stri
       message: String(data.get("message") ?? "").trim(),
       website: String(data.get("website") ?? ""),
     };
+    if (payload.website) return; // honeypot
     setSending(true);
     setStatus({ kind: "info", text: t("form.sending") });
     try {
-      const res = await fetch(LEAD_URL, {
+      const { error } = await supabase.from("leads").insert({
+        role: payload.role,
+        name: payload.name,
+        phone: payload.phone,
+        email: payload.email,
+        message: payload.message,
+        lang,
+        source: "website",
+      });
+      if (error) throw error;
+      // Keep the existing Google Sheet notification as a best-effort mirror.
+      void fetch(LEAD_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload),
-      });
-      const json = (await res.json()) as { ok?: boolean };
-      if (!json?.ok) throw new Error("server");
+      }).catch(() => undefined);
       setStatus({ kind: "ok", text: t("form.ok") });
       form.reset();
       setRole("");
@@ -46,6 +58,7 @@ export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: stri
     } finally {
       setSending(false);
     }
+
   }
 
   return (

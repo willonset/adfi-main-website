@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogListPage } from "@/components/site/BlogPage";
+import { listPublicPosts } from "@/lib/blog.functions";
 
 export const Route = createFileRoute("/blog/")({
+  loader: () => listPublicPosts(),
   head: () => ({
     meta: [
       { title: "Blog ADFI — Affiliate Marketing & Thương mại điện tử" },
@@ -12,5 +14,10 @@ export const Route = createFileRoute("/blog/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <BlogListPage lang="vi" />,
+  component: Page,
 });
+
+function Page() {
+  const posts = Route.useLoaderData();
+  return <BlogListPage lang="vi" posts={posts} />;
+}

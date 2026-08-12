@@ -1,10 +1,10 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { BlogPostPage } from "@/components/site/BlogPage";
-import { getPost } from "@/content/blog";
+import { getPublicPost } from "@/lib/blog.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
-    const post = getPost(params.slug);
+  loader: async ({ params }) => {
+    const post = await getPublicPost({ data: { slug: params.slug } });
     if (!post) throw notFound();
     return { post };
   },
@@ -15,10 +15,10 @@ export const Route = createFileRoute("/blog/$slug")({
     const { post } = loaderData;
     return {
       meta: [
-        { title: `${post.title.vi} — Blog ADFI` },
-        { name: "description", content: post.excerpt.vi },
-        { property: "og:title", content: post.title.vi },
-        { property: "og:description", content: post.excerpt.vi },
+        { title: `${post.title_vi} — Blog ADFI` },
+        { name: "description", content: post.excerpt_vi },
+        { property: "og:title", content: post.title_vi },
+        { property: "og:description", content: post.excerpt_vi },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
