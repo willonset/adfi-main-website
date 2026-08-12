@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { useRole } from "@/components/admin/useRole";
 import { listStaff, grantAdmin, revokeAdmin, type StaffUser } from "@/lib/admin.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin/users")({
   head: () => ({
@@ -171,5 +172,66 @@ function UsersPage() {
         )}
       </div>
     </AdminShell>
+  );
+}
+
+function ChangePasswordPanel() {
+  const [pw1, setPw1] = useState("");
+  const [pw2, setPw2] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setErr("");
+    setOk("");
+    if (pw1.length < 8) return setErr("Mật khẩu tối thiểu 8 ký tự.");
+    if (pw1 !== pw2) return setErr("Hai mật khẩu không khớp.");
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password: pw1 });
+    setBusy(false);
+    if (error) return setErr(error.message);
+    setPw1("");
+    setPw2("");
+    setOk("Đã đổi mật khẩu thành công.");
+  }
+
+  return (
+    <div className="panel">
+      <h2>Đổi mật khẩu tài khoản của bạn</h2>
+      <form className="admin-form-grid" onSubmit={(e) => void submit(e)}>
+        <div className="admin-field">
+          <label>Mật khẩu mới *</label>
+          <input
+            className="admin-input"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={pw1}
+            onChange={(e) => setPw1(e.target.value)}
+            placeholder="Tối thiểu 8 ký tự"
+          />
+        </div>
+        <div className="admin-field">
+          <label>Nhập lại mật khẩu mới *</label>
+          <input
+            className="admin-input"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={pw2}
+            onChange={(e) => setPw2(e.target.value)}
+          />
+        </div>
+        <div className="admin-field" style={{ alignSelf: "end" }}>
+          <button className="admin-btn" type="submit" disabled={busy}>
+            {busy ? "Đang xử lý..." : "Cập nhật mật khẩu"}
+          </button>
+        </div>
+      </form>
+      {err ? <p className="admin-error">{err}</p> : null}
+      {ok ? <p className="admin-ok">{ok}</p> : null}
+    </div>
   );
 }
