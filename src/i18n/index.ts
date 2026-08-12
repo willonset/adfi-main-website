@@ -11,6 +11,8 @@ export const routes = {
   creator: { vi: "/creator", en: "/en/creator" },
   about: { vi: "/about", en: "/en/about" },
   careers: { vi: "/tuyen-dung", en: "/en/careers" },
+  blog: { vi: "/blog", en: "/en/blog" },
+
 } as const;
 
 export type PageKey = keyof typeof routes;
@@ -43,6 +45,7 @@ const vi: Dict = {
   "nav.creator": "For Creator",
   "nav.about": "About Us",
   "nav.careers": "Tuyển dụng",
+  "nav.blog": "Blog",
   "nav.contact": "Liên hệ",
 
   "cta.title": "Ready to work with us ?",
@@ -133,6 +136,7 @@ const en: Dict = {
   "nav.creator": "For Creator",
   "nav.about": "About Us",
   "nav.careers": "Careers",
+  "nav.blog": "Blog",
   "nav.contact": "Contact Us",
 
   "cta.title": "Ready to work with us ?",

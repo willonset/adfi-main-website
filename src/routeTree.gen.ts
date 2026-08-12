@@ -16,6 +16,8 @@ import { Route as BrandRouteImport } from './routes/brand'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as TuyenDungRouteImport } from './routes/tuyen-dung'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAdvertiserRouteImport } from './routes/en.advertiser'
@@ -23,6 +25,8 @@ import { Route as EnBrandRouteImport } from './routes/en.brand'
 import { Route as EnCareersRouteImport } from './routes/en.careers'
 import { Route as EnCreatorRouteImport } from './routes/en.creator'
 import { Route as EnMarketplaceRouteImport } from './routes/en.marketplace'
+import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
+import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,6 +61,16 @@ const MarketplaceRoute = MarketplaceRouteImport.update({
 const TuyenDungRoute = TuyenDungRouteImport.update({
   id: '/tuyen-dung',
   path: '/tuyen-dung',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnIndexRoute = EnIndexRouteImport.update({
@@ -94,6 +108,16 @@ const EnMarketplaceRoute = EnMarketplaceRouteImport.update({
   path: '/en/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
+  id: '/en/blog/',
+  path: '/en/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnBlogSlugRoute = EnBlogSlugRouteImport.update({
+  id: '/en/blog/$slug',
+  path: '/en/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,13 +127,17 @@ export interface FileRoutesByFullPath {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,13 +147,17 @@ export interface FileRoutesByTo {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog': typeof EnBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -136,13 +168,17 @@ export interface FileRoutesById {
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
   '/tuyen-dung': typeof TuyenDungRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/en/about': typeof EnAboutRoute
   '/en/advertiser': typeof EnAdvertiserRoute
   '/en/brand': typeof EnBrandRoute
   '/en/careers': typeof EnCareersRoute
   '/en/creator': typeof EnCreatorRoute
   '/en/marketplace': typeof EnMarketplaceRoute
+  '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -154,13 +190,17 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog/'
     | '/en/'
+    | '/en/blog/$slug'
+    | '/en/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,13 +210,17 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog'
     | '/en'
+    | '/en/blog/$slug'
+    | '/en/blog'
   id:
     | '__root__'
     | '/'
@@ -186,13 +230,17 @@ export interface FileRouteTypes {
     | '/creator'
     | '/marketplace'
     | '/tuyen-dung'
+    | '/blog/$slug'
     | '/en/about'
     | '/en/advertiser'
     | '/en/brand'
     | '/en/careers'
     | '/en/creator'
     | '/en/marketplace'
+    | '/blog/'
     | '/en/'
+    | '/en/blog/$slug'
+    | '/en/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -203,13 +251,17 @@ export interface RootRouteChildren {
   CreatorRoute: typeof CreatorRoute
   MarketplaceRoute: typeof MarketplaceRoute
   TuyenDungRoute: typeof TuyenDungRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   EnAboutRoute: typeof EnAboutRoute
   EnAdvertiserRoute: typeof EnAdvertiserRoute
   EnBrandRoute: typeof EnBrandRoute
   EnCareersRoute: typeof EnCareersRoute
   EnCreatorRoute: typeof EnCreatorRoute
   EnMarketplaceRoute: typeof EnMarketplaceRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   EnIndexRoute: typeof EnIndexRoute
+  EnBlogSlugRoute: typeof EnBlogSlugRoute
+  EnBlogIndexRoute: typeof EnBlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -263,6 +315,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TuyenDungRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/': {
       id: '/en/'
       path: '/en'
@@ -312,6 +378,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/blog/': {
+      id: '/en/blog/'
+      path: '/en/blog'
+      fullPath: '/en/blog/'
+      preLoaderRoute: typeof EnBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/blog/$slug': {
+      id: '/en/blog/$slug'
+      path: '/en/blog/$slug'
+      fullPath: '/en/blog/$slug'
+      preLoaderRoute: typeof EnBlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -323,13 +403,17 @@ const rootRouteChildren: RootRouteChildren = {
   CreatorRoute: CreatorRoute,
   MarketplaceRoute: MarketplaceRoute,
   TuyenDungRoute: TuyenDungRoute,
+  BlogSlugRoute: BlogSlugRoute,
   EnAboutRoute: EnAboutRoute,
   EnAdvertiserRoute: EnAdvertiserRoute,
   EnBrandRoute: EnBrandRoute,
   EnCareersRoute: EnCareersRoute,
   EnCreatorRoute: EnCreatorRoute,
   EnMarketplaceRoute: EnMarketplaceRoute,
+  BlogIndexRoute: BlogIndexRoute,
   EnIndexRoute: EnIndexRoute,
+  EnBlogSlugRoute: EnBlogSlugRoute,
+  EnBlogIndexRoute: EnBlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
