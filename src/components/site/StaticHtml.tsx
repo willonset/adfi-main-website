@@ -42,7 +42,7 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    console.log("[seamap] effect", !!root.querySelector("img.hero-map"));
+    console.log("[seamap] effect");
     const img = root.querySelector<HTMLImageElement>(
       "img.hero-map, img.about-hero-map",
     );
@@ -55,6 +55,7 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
     img.replaceWith(host);
     setMapHost(host);
     return () => {
+      console.log("[seamap] cleanup");
       setMapHost(null);
       host.replaceWith(img);
     };
