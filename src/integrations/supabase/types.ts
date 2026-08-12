@@ -14,6 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          body_en: string
+          body_vi: string
+          category_en: string
+          category_vi: string
+          cover_url: string
+          created_at: string
+          excerpt_en: string
+          excerpt_vi: string
+          id: string
+          is_published: boolean
+          published_at: string
+          slug: string
+          title_en: string
+          title_vi: string
+          updated_at: string
+        }
+        Insert: {
+          body_en?: string
+          body_vi?: string
+          category_en?: string
+          category_vi?: string
+          cover_url?: string
+          created_at?: string
+          excerpt_en?: string
+          excerpt_vi?: string
+          id?: string
+          is_published?: boolean
+          published_at?: string
+          slug: string
+          title_en?: string
+          title_vi?: string
+          updated_at?: string
+        }
+        Update: {
+          body_en?: string
+          body_vi?: string
+          category_en?: string
+          category_vi?: string
+          cover_url?: string
+          created_at?: string
+          excerpt_en?: string
+          excerpt_vi?: string
+          id?: string
+          is_published?: boolean
+          published_at?: string
+          slug?: string
+          title_en?: string
+          title_vi?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      job_applications: {
+        Row: {
+          created_at: string
+          cv_filename: string
+          cv_path: string
+          email: string
+          fullname: string
+          id: string
+          intro: string
+          job_id: string | null
+          lang: string
+          notes: string
+          phone: string
+          position: string
+          source_other: string
+          sources: string[]
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cv_filename?: string
+          cv_path?: string
+          email?: string
+          fullname?: string
+          id?: string
+          intro?: string
+          job_id?: string | null
+          lang?: string
+          notes?: string
+          phone?: string
+          position?: string
+          source_other?: string
+          sources?: string[]
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cv_filename?: string
+          cv_path?: string
+          email?: string
+          fullname?: string
+          id?: string
+          intro?: string
+          job_id?: string | null
+          lang?: string
+          notes?: string
+          phone?: string
+          position?: string
+          source_other?: string
+          sources?: string[]
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       jobs: {
         Row: {
           benefits_en: string[]
@@ -86,6 +205,51 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          lang: string
+          message: string
+          name: string
+          notes: string
+          phone: string
+          role: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          id?: string
+          lang?: string
+          message?: string
+          name?: string
+          notes?: string
+          phone?: string
+          role?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          lang?: string
+          message?: string
+          name?: string
+          notes?: string
+          phone?: string
+          role?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -121,7 +285,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "owner"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -249,7 +413,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "owner"],
     },
   },
 } as const
