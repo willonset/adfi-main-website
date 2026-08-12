@@ -40,7 +40,8 @@ export function AdminShell({
     <div className="admin-shell">
       <aside className="admin-side">
         <div className="admin-brand">
-          ADFI <span>Admin</span>
+          <img src={assets.logoWhite} alt="ADFI" />
+          <span>Admin</span>
         </div>
         {NAV.map((item) => (
           <Link
