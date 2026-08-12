@@ -502,3 +502,35 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
   .footer-bottom { margin: 32px -20px 0; padding: 18px 20px; background: #010205; }
   .footer-bottom span:last-child { display: none; }  /* mobile bar shows only the copyright (Figma) */
 }
+
+/* ---------- Interactive Southeast Asia map ---------- */
+.sea-map { position: relative; pointer-events: auto; }
+.sea-map__img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.sea-map__hit { position: absolute; padding: 0; border: 0; background: transparent;
+  border-radius: 40%; cursor: pointer; z-index: 3; }
+.sea-map__hit:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.sea-map__hit.is-active { background: rgba(236,34,31,.14); }
+.sea-map__card { position: absolute; z-index: 4; transform: translate(0, -50%);
+  opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none; }
+.sea-map__card.is-open { opacity: 1; visibility: visible; transform: translate(0, -50%) scale(1); }
+.sea-map__card--right { transform: translate(-100%, -50%); }
+.sea-map__card--right.is-open { transform: translate(-100%, -50%) scale(1); }
+.sea-map__pin { position: absolute; left: 0; top: 50%; width: 10px; height: 10px;
+  margin: -5px 0 0 -5px; border-radius: 50%; background: var(--red);
+  box-shadow: 0 0 0 6px rgba(236,34,31,.18); }
+.sea-map__panel { margin-left: 18px; min-width: 210px; padding: 14px 16px; border-radius: 14px;
+  background: #fff; box-shadow: 0 12px 34px rgba(17,17,17,.16); border: 1px solid rgba(17,17,17,.06); }
+.sea-map__card--right .sea-map__panel { margin-left: 0; margin-right: 18px; }
+.sea-map__name { font-weight: 700; font-size: 15px; color: var(--red); margin-bottom: 8px; }
+.sea-map__panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.sea-map__panel li { position: relative; padding-left: 14px; font-size: 13px; line-height: 18px; color: var(--ink); }
+.sea-map__panel li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--red); }
+.hero-map.sea-map-host { pointer-events: auto; aspect-ratio: 16 / 9; }
+.about-hero-map.sea-map-host { aspect-ratio: 16 / 9; }
+@media (max-width: 900px) {
+  .sea-map__panel { min-width: 150px; padding: 10px 12px; }
+  .sea-map__panel li { font-size: 11px; line-height: 15px; }
+  .sea-map__name { font-size: 13px; }
+}
