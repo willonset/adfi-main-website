@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { assets } from "@/lib/assets";
 import viPages from "@/content/pages-vi.json";
 import enPages from "@/content/pages-en.json";
 import type { Lang } from "@/i18n";
