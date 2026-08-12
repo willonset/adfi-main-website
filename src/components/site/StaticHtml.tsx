@@ -40,30 +40,28 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
     [navigate],
   );
 
+  // Swap the static map image for the interactive map. A dedicated React root
+  // is used so the surrounding innerHTML container never has to re-render.
   useEffect(() => {
-    let host: HTMLElement | null = null;
-    let img: HTMLImageElement | null = null;
-    // Wait a frame so hydration has finished before mutating the injected markup.
-    const raf = window.setTimeout(() => {
-      const root = rootRef.current;
-      console.log("[seamap] raf", !!root);
-      if (!root) return;
-      img = root.querySelector<HTMLImageElement>(
-        "img.hero-map, img.about-hero-map",
-      );
-      console.log("[seamap] img", !!img);
-      if (!img) return;
-      host = document.createElement("div");
-      host.className = `${img.className} sea-map-host`;
-      img.replaceWith(host);
-      setMapHost(host);
-    }, 800);
+    const root = rootRef.current;
+    if (!root) return;
+    const img = root.querySelector<HTMLImageElement>(
+      "img.hero-map, img.about-hero-map",
+    );
+    if (!img) return;
+    const host = document.createElement("div");
+    host.className = `${img.className} sea-map-host`;
+    img.replaceWith(host);
+    let reactRoot: Root | null = createRoot(host);
+    reactRoot.render(<SeaMap lang={lang} />);
     return () => {
-      clearTimeout(raf);
-      setMapHost(null);
-      if (host && img && host.parentNode) host.replaceWith(img);
+      const r = reactRoot;
+      reactRoot = null;
+      setTimeout(() => r?.unmount(), 0);
+      if (host.parentNode) host.replaceWith(img);
     };
-  }, [html]);
+  }, [html, lang]);
+
 
 
   useEffect(() => {
