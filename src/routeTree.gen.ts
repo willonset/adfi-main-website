@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdvertiserRouteImport } from './routes/advertiser'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -26,12 +27,17 @@ import { Route as EnBrandRouteImport } from './routes/en.brand'
 import { Route as EnCareersRouteImport } from './routes/en.careers'
 import { Route as EnCreatorRouteImport } from './routes/en.creator'
 import { Route as EnMarketplaceRouteImport } from './routes/en.marketplace'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -114,6 +120,11 @@ const EnMarketplaceRoute = EnMarketplaceRouteImport.update({
   path: '/en/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
   id: '/en/blog/',
   path: '/en/blog/',
@@ -144,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -165,11 +177,13 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
   '/en/blog': typeof EnBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/advertiser': typeof AdvertiserRoute
   '/auth': typeof AuthRoute
@@ -187,6 +201,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -210,6 +225,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/en/'
     | '/en/blog/$slug'
+    | '/admin/'
     | '/en/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -231,10 +247,12 @@ export interface FileRouteTypes {
     | '/blog'
     | '/en'
     | '/en/blog/$slug'
+    | '/admin'
     | '/en/blog'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/advertiser'
     | '/auth'
@@ -252,11 +270,13 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/en/'
     | '/en/blog/$slug'
+    | '/_authenticated/admin/'
     | '/en/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AdvertiserRoute: typeof AdvertiserRoute
   AuthRoute: typeof AuthRoute
@@ -284,6 +304,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -398,6 +425,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/en/blog/': {
       id: '/en/blog/'
       path: '/en/blog'
@@ -415,8 +449,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AdvertiserRoute: AdvertiserRoute,
   AuthRoute: AuthRoute,
