@@ -45,10 +45,12 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
     // Wait a frame so hydration has finished before mutating the injected markup.
     const raf = requestAnimationFrame(() => {
       const root = rootRef.current;
+      console.log("[seamap] raf", !!root);
       if (!root) return;
       img = root.querySelector<HTMLImageElement>(
         "img.hero-map, img.about-hero-map",
       );
+      console.log("[seamap] img", !!img);
       if (!img) return;
       host = document.createElement("div");
       host.className = `${img.className} sea-map-host`;
