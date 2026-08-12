@@ -15,9 +15,10 @@ export function StaticPage({
   const { before, after } = getPageContent(lang, page);
   return (
     <SiteLayout lang={lang}>
-      <StaticHtml html={before} />
+      <StaticHtml html={before} lang={lang} />
       <LeadForm lang={lang} defaultRole={role} />
-      <StaticHtml html={after} />
+      <StaticHtml html={after} lang={lang} />
     </SiteLayout>
   );
+
 }
