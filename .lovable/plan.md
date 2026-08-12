@@ -57,11 +57,19 @@ Các trang được chuyển sang route riêng, giữ nguyên bố cục, nội 
 - Tôi sẽ cung cấp sẵn đoạn code Apps Script để bạn dán vào Google Sheet và deploy; sau đó bạn gửi tôi URL `/exec` để gắn vào ứng dụng (lưu dưới dạng biến cấu hình, không hard-code lộ liễu).
 - Trước khi có URL đó, form sẽ hoạt động ở chế độ hiển thị lỗi thân thiện.
 
-## Song ngữ Việt — Anh
-- Nhãn UI và tiêu đề mục dùng dạng song ngữ nhẹ như ảnh mẫu (ví dụ "Cơ hội nghề nghiệp / Job Opportunities", "Apply Now", "Full-time / Remote / CTV"), nội dung JD nhập tiếng Việt, có trường tiêu đề tiếng Anh tùy chọn cho từng job.
+## Phần 4 — Website song ngữ Việt / Anh
+
+- **Toàn bộ website** (Home, About, Marketplace, Brand, Advertiser, Creator, Tuyển dụng) có đủ hai bản nội dung: tiếng Việt và tiếng Anh.
+- **Nút chuyển ngôn ngữ** đặt ở header (cạnh nút Contact Us) dạng gọn "VI | EN", có trong cả menu mobile. Đổi ngôn ngữ giữ nguyên trang đang xem và ghi nhớ lựa chọn cho lần truy cập sau.
+- **URL theo ngôn ngữ**: tiếng Việt giữ đường dẫn hiện tại (`/`, `/about`, `/tuyen-dung`), tiếng Anh có tiền tố `/en` (`/en`, `/en/about`, `/en/careers`). Nhờ vậy mỗi ngôn ngữ được Google lập chỉ mục riêng, chia sẻ link đúng ngôn ngữ, và có thẻ `hreflang` liên kết hai bản.
+- Tiêu đề/mô tả SEO, nhãn nút, form liên hệ, form ứng tuyển, thông báo lỗi đều dịch theo ngôn ngữ đang chọn.
+- **Nội dung tuyển dụng song ngữ**: mỗi job trong Lovable Cloud có trường tiếng Việt và tiếng Anh (tiêu đề, mô tả, yêu cầu, quyền lợi); trang quản trị cho nhập cả hai. Nếu thiếu bản tiếng Anh, hệ thống tự hiển thị bản tiếng Việt thay thế.
+- Toàn bộ chữ cố định trong giao diện được gom vào file từ điển VI/EN, dễ bổ sung/chỉnh sửa về sau.
 
 ## Ghi chú kỹ thuật
 - TanStack Start + Tailwind v4; CSS ADFI được chuyển thành token trong `src/styles.css`, không dùng class màu cứng.
 - Bộ lọc lưu trên URL (`?bo-phan=...&hinh-thuc=...`) để chia sẻ được link đã lọc.
 - Job list đọc qua route loader + TanStack Query để SSR/SEO tốt; mỗi JD có metadata riêng và JSON-LD `JobPosting`.
 - Upload CV giới hạn dung lượng/định dạng ở client trước khi encode base64.
+- i18n: layout route `_lang` với hai nhánh `/` (vi) và `/en`, dùng chung component trang; từ điển đặt trong `src/i18n/{vi,en}.ts`; ngôn ngữ đọc từ route (không phụ thuộc `localStorage` khi render) để tránh lệch SSR, lựa chọn lưu lại chỉ dùng để điều hướng lần sau.
+
