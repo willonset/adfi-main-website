@@ -29,11 +29,16 @@
   gap: 6px;
 }
 .admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: -0.02em;
   margin: 0 8px 18px;
+  color: var(--ad-text);
 }
+.admin-brand img { height: 26px; width: auto; display: block; }
 .admin-brand span { color: var(--ad-red); }
 .admin-nav-link {
   display: block;
