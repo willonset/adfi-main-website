@@ -71,6 +71,8 @@ export function AdminShell({
 
   return (
     <div className="admin-shell">
+      <AdminThemeToggle />
+
       <aside className="admin-side">
         <div className="admin-brand">
           <img src={assets.logoWhite} alt="ADFI" />
