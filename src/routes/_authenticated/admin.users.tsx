@@ -125,6 +125,10 @@ function UsersPage() {
         <p className="admin-note">Chỉ chủ sở hữu mới cấp hoặc thu hồi quyền quản trị.</p>
       )}
 
+      <ChangePasswordPanel />
+
+
+
       <div className="panel">
         <h2>Đội quản trị</h2>
         {rows === null ? (
