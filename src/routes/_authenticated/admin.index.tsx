@@ -49,8 +49,7 @@ function OverviewPage() {
 
   useEffect(() => {
     void (async () => {
-      const c = (table: "leads" | "job_applications" | "jobs" | "blog_posts") =>
-        supabase.from(table).select("id", { count: "exact", head: true });
+      const head = { count: "exact" as const, head: true };
       const d30 = since(30);
       const [
         leadsAll,
@@ -66,16 +65,16 @@ function OverviewPage() {
         recentLeads,
         recentApps,
       ] = await Promise.all([
-        c("leads"),
-        c("leads").eq("status", "new"),
-        c("leads").gte("created_at", d30),
-        c("job_applications"),
-        c("job_applications").eq("status", "new"),
-        c("job_applications").gte("created_at", d30),
-        c("jobs").eq("is_open", true),
-        c("jobs"),
-        c("blog_posts").eq("is_published", true),
-        c("blog_posts"),
+        supabase.from("leads").select("id", head),
+        supabase.from("leads").select("id", head).eq("status", "new"),
+        supabase.from("leads").select("id", head).gte("created_at", d30),
+        supabase.from("job_applications").select("id", head),
+        supabase.from("job_applications").select("id", head).eq("status", "new"),
+        supabase.from("job_applications").select("id", head).gte("created_at", d30),
+        supabase.from("jobs").select("id", head).eq("is_open", true),
+        supabase.from("jobs").select("id", head),
+        supabase.from("blog_posts").select("id", head).eq("is_published", true),
+        supabase.from("blog_posts").select("id", head),
         supabase.from("leads").select("id, name, email, role, created_at").order("created_at", { ascending: false }).limit(5),
         supabase.from("job_applications").select("id, fullname, position, created_at").order("created_at", { ascending: false }).limit(5),
       ]);
