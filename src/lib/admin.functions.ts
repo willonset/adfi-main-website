@@ -98,3 +98,22 @@ export const revokeAdmin = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+/** Bootstrap: grant the owner role to the signed-in user only when no owner exists yet. */
+export const claimOwner = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { count, error } = await supabaseAdmin
+      .from("user_roles")
+      .select("id", { count: "exact", head: true })
+      .eq("role", "owner");
+    if (error) throw new Error(error.message);
+    if ((count ?? 0) > 0) return { ok: false };
+
+    const { error: insertError } = await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: context.userId, role: "owner" });
+    if (insertError && !insertError.message.includes("duplicate")) throw new Error(insertError.message);
+    return { ok: true };
+  });

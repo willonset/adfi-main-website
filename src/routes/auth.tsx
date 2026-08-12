@@ -1,6 +1,7 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { claimOwner } from "@/lib/admin.functions";
 import "@/admin.css";
 
 export const Route = createFileRoute("/auth")({
@@ -59,7 +60,11 @@ function AuthPage() {
       }
       const { error: err2 } = await supabase.auth.signInWithPassword({ email, password });
       if (err2) throw err2;
-      await supabase.rpc("claim_owner");
+      try {
+        await claimOwner();
+      } catch {
+        /* owner already exists — safe to ignore */
+      }
       void navigate({ to: "/admin", replace: true });
     } catch (err) {
       const message = err instanceof Error ? err.message : "Đăng nhập thất bại";
