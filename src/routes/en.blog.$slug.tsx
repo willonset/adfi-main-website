@@ -1,10 +1,10 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { BlogPostPage } from "@/components/site/BlogPage";
-import { getPost } from "@/content/blog";
+import { getPublicPost } from "@/lib/blog.functions";
 
 export const Route = createFileRoute("/en/blog/$slug")({
-  loader: ({ params }) => {
-    const post = getPost(params.slug);
+  loader: async ({ params }) => {
+    const post = await getPublicPost({ data: { slug: params.slug } });
     if (!post) throw notFound();
     return { post };
   },
@@ -13,12 +13,14 @@ export const Route = createFileRoute("/en/blog/$slug")({
       return { meta: [{ title: "Article not found — ADFI" }, { name: "robots", content: "noindex" }] };
     }
     const { post } = loaderData;
+    const title = post.title_en || post.title_vi;
+    const desc = post.excerpt_en || post.excerpt_vi;
     return {
       meta: [
-        { title: `${post.title.en} — ADFI Blog` },
-        { name: "description", content: post.excerpt.en },
-        { property: "og:title", content: post.title.en },
-        { property: "og:description", content: post.excerpt.en },
+        { title: `${title} — ADFI Blog` },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
