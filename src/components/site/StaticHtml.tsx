@@ -1,10 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useEffect, useRef } from "react";
+import { createRoot, type Root } from "react-dom/client";
 import { SeaMap } from "./SeaMap";
 import { assets } from "@/lib/assets";
 import viPages from "@/content/pages-vi.json";
-console.log("[seamap] module loaded");
 import enPages from "@/content/pages-en.json";
 import type { Lang } from "@/i18n";
 
@@ -27,7 +26,6 @@ export function getPageContent(lang: Lang, page: string): Section {
 export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang }) {
   const navigate = useNavigate();
   const rootRef = useRef<HTMLDivElement>(null);
-  const [mapHost, setMapHost] = useState<HTMLElement | null>(null);
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -139,14 +137,11 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
 
   if (!html) return null;
   return (
-    <>
-      <div
-        ref={rootRef}
-        onClick={onClick}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-      {mapHost ? createPortal(<SeaMap lang={lang} />, mapHost) : null}
-    </>
+    <div
+      ref={rootRef}
+      onClick={onClick}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
 
 }
