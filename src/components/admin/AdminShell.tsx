@@ -5,14 +5,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { useRole } from "./useRole";
 import "@/admin.css";
 
-const NAV = [
+const NAV: { to: string; label: string; exact?: boolean }[] = [
   { to: "/admin", label: "Tổng quan", exact: true },
   { to: "/admin/customers", label: "Khách hàng" },
   { to: "/admin/jobs", label: "Tuyển dụng" },
   { to: "/admin/applications", label: "Hồ sơ ứng tuyển" },
   { to: "/admin/blog", label: "Blog" },
   { to: "/admin/users", label: "Phân quyền" },
-] as const;
+];
 
 export function AdminShell({
   title,
