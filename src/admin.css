@@ -142,3 +142,12 @@
 .badge.off { color: #ff8b89; border-color: #5c2321; }
 .admin-modal.wide { width: min(980px, 100%); }
 .admin-textarea.tall { min-height: 240px; }
+
+/* Contrast hardening */
+.panel h2, .admin-head h1 { color: var(--ad-text); }
+.admin-head p, .admin-note, .admin-field > label, .admin-table th, .admin-table .muted, .stat-card .label, .stat-card .sub { color: var(--ad-muted); }
+.admin-input::placeholder, .admin-textarea::placeholder { color: #97a1b2; }
+.badge, .pill { color: var(--ad-text); border-color: var(--ad-line); background: var(--ad-panel-2); }
+.badge.ok { color: #7ee2a8; border-color: #2f6d4c; }
+.admin-error { color: #ff8b86; }
+.admin-ok { color: #7ee2a8; }
