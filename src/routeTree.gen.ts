@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdvertiserRouteImport } from './routes/advertiser'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BrandRouteImport } from './routes/brand'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
@@ -41,6 +42,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdvertiserRoute = AdvertiserRouteImport.update({
   id: '/advertiser',
   path: '/advertiser',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BrandRoute = BrandRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/advertiser': typeof AdvertiserRoute
+  '/auth': typeof AuthRoute
   '/brand': typeof BrandRoute
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/advertiser': typeof AdvertiserRoute
+  '/auth': typeof AuthRoute
   '/brand': typeof BrandRoute
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/advertiser': typeof AdvertiserRoute
+  '/auth': typeof AuthRoute
   '/brand': typeof BrandRoute
   '/creator': typeof CreatorRoute
   '/marketplace': typeof MarketplaceRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/advertiser'
+    | '/auth'
     | '/brand'
     | '/creator'
     | '/marketplace'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/advertiser'
+    | '/auth'
     | '/brand'
     | '/creator'
     | '/marketplace'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/advertiser'
+    | '/auth'
     | '/brand'
     | '/creator'
     | '/marketplace'
@@ -247,6 +259,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdvertiserRoute: typeof AdvertiserRoute
+  AuthRoute: typeof AuthRoute
   BrandRoute: typeof BrandRoute
   CreatorRoute: typeof CreatorRoute
   MarketplaceRoute: typeof MarketplaceRoute
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/advertiser'
       fullPath: '/advertiser'
       preLoaderRoute: typeof AdvertiserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brand': {
@@ -399,6 +419,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdvertiserRoute: AdvertiserRoute,
+  AuthRoute: AuthRoute,
   BrandRoute: BrandRoute,
   CreatorRoute: CreatorRoute,
   MarketplaceRoute: MarketplaceRoute,
