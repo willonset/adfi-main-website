@@ -45,6 +45,7 @@ const vi: Dict = {
   "nav.creator": "For Creator",
   "nav.about": "About Us",
   "nav.careers": "Tuyển dụng",
+  "nav.blog": "Blog",
   "nav.contact": "Liên hệ",
 
   "cta.title": "Ready to work with us ?",
@@ -135,6 +136,7 @@ const en: Dict = {
   "nav.creator": "For Creator",
   "nav.about": "About Us",
   "nav.careers": "Careers",
+  "nav.blog": "Blog",
   "nav.contact": "Contact Us",
 
   "cta.title": "Ready to work with us ?",

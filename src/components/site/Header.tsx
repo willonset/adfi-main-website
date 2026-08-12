@@ -11,6 +11,7 @@ const NAV: { key: PageKey; label: string }[] = [
   { key: "creator", label: "nav.creator" },
   { key: "about", label: "nav.about" },
   { key: "careers", label: "nav.careers" },
+  { key: "blog", label: "nav.blog" },
 ];
 
 export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
