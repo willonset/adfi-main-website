@@ -13,7 +13,11 @@ export type StaffUser = {
 export const listStaff = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<StaffUser[]> => {
-    const { data: staff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    const { data: myRoles } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId);
+    const staff = (myRoles ?? []).some((r) => r.role === "admin" || r.role === "owner");
     if (!staff) throw new Error("Forbidden");
 
     const { data: roles, error } = await context.supabase
@@ -48,10 +52,11 @@ export const grantAdmin = createServerFn({ method: "POST" })
     return { email, password: input.password ?? "" };
   })
   .handler(async ({ data, context }) => {
-    const { data: isOwner } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "owner",
-    });
+    const { data: myRoles } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId);
+    const isOwner = (myRoles ?? []).some((r) => r.role === "owner");
     if (!isOwner) throw new Error("Forbidden");
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -85,10 +90,11 @@ export const revokeAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { userId: string }) => input)
   .handler(async ({ data, context }) => {
-    const { data: isOwner } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "owner",
-    });
+    const { data: myRoles } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId);
+    const isOwner = (myRoles ?? []).some((r) => r.role === "owner");
     if (!isOwner) throw new Error("Forbidden");
     const { error } = await context.supabase
       .from("user_roles")
