@@ -278,11 +278,3 @@
 @media (max-width: 720px) {
   .blog-article h1 { font-size: 32px; line-height: 40px; }
 }
-
-.post-body h3 { font-size: 20px; line-height: 28px; margin: 26px 0 10px; }
-.post-body ol { margin: 0 0 20px; padding-left: 20px; list-style: decimal; }
-.post-body ol li { font-size: 17px; line-height: 30px; color: var(--muted-2); margin-bottom: 8px; }
-.post-body img { max-width: 100%; height: auto; border-radius: 14px; margin: 20px 0; display: block; }
-.post-body blockquote { margin: 0 0 20px; padding: 4px 0 4px 16px; border-left: 3px solid var(--brand, #ec221f); font-size: 18px; line-height: 30px; }
-.post-body a { color: var(--brand, #ec221f); text-decoration: underline; }
-.post-body figure { margin: 20px 0; }

@@ -35,7 +35,6 @@ import { Route as AuthenticatedAdminJobsRouteImport } from './routes/_authentica
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
-import { Route as ApiPublicBlogMediaSplatRouteImport } from './routes/api/public/blog-media.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -168,11 +167,6 @@ const EnBlogSlugRoute = EnBlogSlugRouteImport.update({
   path: '/en/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicBlogMediaSplatRoute = ApiPublicBlogMediaSplatRouteImport.update({
-  id: '/api/public/blog-media/$',
-  path: '/api/public/blog-media/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -200,7 +194,6 @@ export interface FileRoutesByFullPath {
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
-  '/api/public/blog-media/$': typeof ApiPublicBlogMediaSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -228,7 +221,6 @@ export interface FileRoutesByTo {
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/en/blog': typeof EnBlogIndexRoute
-  '/api/public/blog-media/$': typeof ApiPublicBlogMediaSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -258,7 +250,6 @@ export interface FileRoutesById {
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
-  '/api/public/blog-media/$': typeof ApiPublicBlogMediaSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -288,7 +279,6 @@ export interface FileRouteTypes {
     | '/en/blog/$slug'
     | '/admin/'
     | '/en/blog/'
-    | '/api/public/blog-media/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -316,7 +306,6 @@ export interface FileRouteTypes {
     | '/en/blog/$slug'
     | '/admin'
     | '/en/blog'
-    | '/api/public/blog-media/$'
   id:
     | '__root__'
     | '/'
@@ -345,7 +334,6 @@ export interface FileRouteTypes {
     | '/en/blog/$slug'
     | '/_authenticated/admin/'
     | '/en/blog/'
-    | '/api/public/blog-media/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -369,7 +357,6 @@ export interface RootRouteChildren {
   EnIndexRoute: typeof EnIndexRoute
   EnBlogSlugRoute: typeof EnBlogSlugRoute
   EnBlogIndexRoute: typeof EnBlogIndexRoute
-  ApiPublicBlogMediaSplatRoute: typeof ApiPublicBlogMediaSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -556,13 +543,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnBlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/blog-media/$': {
-      id: '/api/public/blog-media/$'
-      path: '/api/public/blog-media/$'
-      fullPath: '/api/public/blog-media/$'
-      preLoaderRoute: typeof ApiPublicBlogMediaSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -608,7 +588,6 @@ const rootRouteChildren: RootRouteChildren = {
   EnIndexRoute: EnIndexRoute,
   EnBlogSlugRoute: EnBlogSlugRoute,
   EnBlogIndexRoute: EnBlogIndexRoute,
-  ApiPublicBlogMediaSplatRoute: ApiPublicBlogMediaSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

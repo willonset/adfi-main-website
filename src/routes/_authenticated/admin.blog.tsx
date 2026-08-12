@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { RichEditor, toEditorHtml } from "@/components/admin/RichEditor";
 import { supabase } from "@/integrations/supabase/client";
-
 
 export const Route = createFileRoute("/_authenticated/admin/blog")({
   head: () => ({
@@ -188,17 +186,7 @@ function BlogAdminPage() {
                   </td>
                   <td>
                     <div className="row-actions">
-                      <button
-                        className="admin-btn ghost sm"
-                        onClick={() =>
-                          setDraft({
-                            ...r,
-                            body_vi: toEditorHtml(r.body_vi),
-                            body_en: toEditorHtml(r.body_en),
-                          })
-                        }
-                      >
-
+                      <button className="admin-btn ghost sm" onClick={() => setDraft({ ...r })}>
                         Sửa
                       </button>
                       <button className="admin-btn ghost sm" onClick={() => void togglePublish(r)}>
@@ -311,21 +299,22 @@ function BlogAdminPage() {
               </div>
             </div>
 
-            <div style={{ marginTop: 14 }}>
-              <RichEditor
-                label="Nội dung (VI)"
+            <div className="admin-field" style={{ marginTop: 14 }}>
+              <label>Nội dung (VI) — dùng "## Tiêu đề" và "- gạch đầu dòng"</label>
+              <textarea
+                className="admin-textarea tall"
                 value={draft.body_vi}
-                onChange={(html) => setDraft((d) => (d ? { ...d, body_vi: html } : d))}
+                onChange={(e) => setDraft({ ...draft, body_vi: e.target.value })}
               />
             </div>
-            <div style={{ marginTop: 14 }}>
-              <RichEditor
-                label="Nội dung (EN)"
+            <div className="admin-field" style={{ marginTop: 14 }}>
+              <label>Nội dung (EN)</label>
+              <textarea
+                className="admin-textarea tall"
                 value={draft.body_en}
-                onChange={(html) => setDraft((d) => (d ? { ...d, body_en: html } : d))}
+                onChange={(e) => setDraft({ ...draft, body_en: e.target.value })}
               />
             </div>
-
 
             {error ? <p className="admin-error">{error}</p> : null}
             <div className="admin-modal-actions">
