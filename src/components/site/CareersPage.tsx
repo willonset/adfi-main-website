@@ -2,6 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "./SiteLayout";
 import { type Lang, makeT, SOURCE_OPTIONS } from "@/i18n";
+import { submitApplication } from "@/lib/apply.functions";
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("read error"));
+    reader.onload = () => resolve(String(reader.result).split(",")[1] ?? "");
+    reader.readAsDataURL(file);
+  });
+}
 
 const DEPARTMENTS = ["Sales", "Marketing", "Digital", "Logistic", "E-commerce", "Hành chính văn phòng"];
 const DEPARTMENT_EN: Record<string, string> = {
@@ -377,28 +387,23 @@ function ApplyModal({ job, lang, onClose }: { job: Job; lang: Lang; onClose: () 
     try {
       const website = String(data.get("website") ?? "");
       if (website) return; // honeypot
-      const ext = file.name.split(".").pop()?.toLowerCase() ?? "pdf";
-      const path = `${job.slug}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-      const upload = await supabase.storage.from("cvs").upload(path, file, {
-        contentType: file.type || "application/octet-stream",
-        upsert: false,
+      await submitApplication({
+        data: {
+          jobId: job.id,
+          jobSlug: job.slug,
+          position: lang === "vi" ? job.title_vi : job.title_en,
+          fullname: String(data.get("fullname") ?? "").trim(),
+          email: String(data.get("email") ?? "").trim(),
+          phone: String(data.get("phone") ?? "").trim(),
+          intro: String(data.get("intro") ?? "").trim(),
+          sources,
+          sourceOther: other.trim(),
+          lang,
+          cvFilename: file.name,
+          cvContentType: file.type || "application/octet-stream",
+          cvBase64: await fileToBase64(file),
+        },
       });
-      if (upload.error) throw upload.error;
-
-      const { error } = await supabase.from("job_applications").insert({
-        job_id: job.id,
-        position: lang === "vi" ? job.title_vi : job.title_en,
-        fullname: String(data.get("fullname") ?? "").trim(),
-        email: String(data.get("email") ?? "").trim(),
-        phone: String(data.get("phone") ?? "").trim(),
-        intro: String(data.get("intro") ?? "").trim(),
-        sources,
-        source_other: other.trim(),
-        cv_path: path,
-        cv_filename: file.name,
-        lang,
-      });
-      if (error) throw error;
 
       setStatus({ kind: "ok", text: t("apply.ok") });
       form.reset();
