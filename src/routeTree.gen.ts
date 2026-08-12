@@ -25,6 +25,7 @@ import { Route as EnBrandRouteImport } from './routes/en.brand'
 import { Route as EnCareersRouteImport } from './routes/en.careers'
 import { Route as EnCreatorRouteImport } from './routes/en.creator'
 import { Route as EnMarketplaceRouteImport } from './routes/en.marketplace'
+import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +107,11 @@ const EnMarketplaceRoute = EnMarketplaceRouteImport.update({
   path: '/en/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
+  id: '/en/blog/',
+  path: '/en/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog': typeof BlogIndexRoute
   '/en': typeof EnIndexRoute
+  '/en/blog': typeof EnBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/en/marketplace': typeof EnMarketplaceRoute
   '/blog/': typeof BlogIndexRoute
   '/en/': typeof EnIndexRoute
+  '/en/blog/': typeof EnBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog/'
     | '/en/'
+    | '/en/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog'
     | '/en'
+    | '/en/blog'
   id:
     | '__root__'
     | '/'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/en/marketplace'
     | '/blog/'
     | '/en/'
+    | '/en/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   EnMarketplaceRoute: typeof EnMarketplaceRoute
   BlogIndexRoute: typeof BlogIndexRoute
   EnIndexRoute: typeof EnIndexRoute
+  EnBlogIndexRoute: typeof EnBlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -352,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/blog/': {
+      id: '/en/blog/'
+      path: '/en/blog'
+      fullPath: '/en/blog/'
+      preLoaderRoute: typeof EnBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -372,6 +392,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnMarketplaceRoute: EnMarketplaceRoute,
   BlogIndexRoute: BlogIndexRoute,
   EnIndexRoute: EnIndexRoute,
+  EnBlogIndexRoute: EnBlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
