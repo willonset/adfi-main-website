@@ -11,6 +11,8 @@ export const routes = {
   creator: { vi: "/creator", en: "/en/creator" },
   about: { vi: "/about", en: "/en/about" },
   careers: { vi: "/tuyen-dung", en: "/en/careers" },
+  blog: { vi: "/blog", en: "/en/blog" },
+
 } as const;
 
 export type PageKey = keyof typeof routes;
