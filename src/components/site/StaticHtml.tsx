@@ -1,5 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { SeaMap } from "./SeaMap";
 import { assets } from "@/lib/assets";
 import viPages from "@/content/pages-vi.json";
 import enPages from "@/content/pages-en.json";
