@@ -276,6 +276,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_owner: { Args: never; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -283,6 +284,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user" | "owner"
