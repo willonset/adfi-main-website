@@ -6,7 +6,7 @@ const LEAD_URL =
 
 const ROLES = ["Marketplace", "Brand", "Advertiser", "Creator"];
 
-export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: string }) {
+export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: string | undefined }) {
   const t = makeT(lang);
   const [role, setRole] = useState(defaultRole ?? "");
   const [sending, setSending] = useState(false);
