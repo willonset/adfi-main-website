@@ -3,9 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "./SiteLayout";
 import { type Lang, makeT, SOURCE_OPTIONS } from "@/i18n";
 
-const APPLY_URL =
-  "https://script.google.com/macros/s/AKfycby76ZkWV2aOAbUA-h7q-mx2LRNKW964plIHBVpl2sZepZzM_8kw3xcAADnB7jNJv43n/exec";
-
 const DEPARTMENTS = ["Sales", "Marketing", "Digital", "Logistic", "E-commerce", "Hành chính văn phòng"];
 const DEPARTMENT_EN: Record<string, string> = {
   Sales: "Sales",
