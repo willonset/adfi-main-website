@@ -32,6 +32,7 @@ import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_au
 import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin.blog'
 import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin.customers'
 import { Route as AuthenticatedAdminJobsRouteImport } from './routes/_authenticated/admin.jobs'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
 
@@ -151,6 +152,11 @@ const AuthenticatedAdminJobsRoute = AuthenticatedAdminJobsRouteImport.update({
   path: '/admin/jobs',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
   id: '/en/blog/',
   path: '/en/blog/',
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/admin/jobs': typeof AuthenticatedAdminJobsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -210,6 +217,7 @@ export interface FileRoutesByTo {
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/admin/jobs': typeof AuthenticatedAdminJobsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/en/blog': typeof EnBlogIndexRoute
@@ -238,6 +246,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/_authenticated/admin/jobs': typeof AuthenticatedAdminJobsRoute
+  '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/customers'
     | '/admin/jobs'
+    | '/admin/users'
     | '/en/blog/$slug'
     | '/admin/'
     | '/en/blog/'
@@ -292,6 +302,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/customers'
     | '/admin/jobs'
+    | '/admin/users'
     | '/en/blog/$slug'
     | '/admin'
     | '/en/blog'
@@ -319,6 +330,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blog'
     | '/_authenticated/admin/customers'
     | '/_authenticated/admin/jobs'
+    | '/_authenticated/admin/users'
     | '/en/blog/$slug'
     | '/_authenticated/admin/'
     | '/en/blog/'
@@ -510,6 +522,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminJobsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/en/blog/': {
       id: '/en/blog/'
       path: '/en/blog'
@@ -532,6 +551,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRoute
   AuthenticatedAdminCustomersRoute: typeof AuthenticatedAdminCustomersRoute
   AuthenticatedAdminJobsRoute: typeof AuthenticatedAdminJobsRoute
+  AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -540,6 +560,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRoute,
   AuthenticatedAdminCustomersRoute: AuthenticatedAdminCustomersRoute,
   AuthenticatedAdminJobsRoute: AuthenticatedAdminJobsRoute,
+  AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 

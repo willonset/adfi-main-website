@@ -63,7 +63,7 @@ function UsersPage() {
     setOk("");
     setBusy(true);
     try {
-      await doGrant({ data: { email, password: password || undefined } });
+      await doGrant({ data: { email, password } });
       setOk(`Đã cấp quyền quản trị cho ${email}.`);
       setEmail("");
       setPassword("");
