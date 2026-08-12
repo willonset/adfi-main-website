@@ -42,6 +42,27 @@ export function StaticHtml({ html, lang = "vi" }: { html: string; lang?: Lang })
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const img = root.querySelector<HTMLImageElement>(
+      "img.hero-map, img.about-hero-map",
+    );
+    if (!img) {
+      setMapHost(null);
+      return;
+    }
+    const host = document.createElement("div");
+    host.className = `${img.className} sea-map-host`;
+    img.replaceWith(host);
+    setMapHost(host);
+    return () => {
+      setMapHost(null);
+      host.replaceWith(img);
+    };
+  }, [html]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
     const figure = root.querySelector<HTMLElement>(".team-photo");
     const img = figure?.querySelector("img");
     const dots = root.querySelector<HTMLElement>(".team-dots");
