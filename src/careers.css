@@ -247,6 +247,18 @@
 }
 
 /* ---------- Blog ---------- */
+.blog-highlights { background: #fff; }
+.blog-highlights .bh-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.blog-highlights .bh-head h2 { max-width: 720px; margin-top: 10px; }
+.blog-highlights .bh-link {
+  font-size: 15px; font-weight: 700; color: var(--red); text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; transition: gap 0.15s;
+}
+.blog-highlights .bh-link:hover { gap: 10px; }
+.blog-highlights .blog-card h3 { font-size: 20px; line-height: 28px; }
+.blog-highlights .blog-card p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .blog-hero { padding-bottom: 40px; }
 .blog-list-section { padding: 24px 0 96px; background: #fff; }
 .blog-grid {

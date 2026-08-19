@@ -32,9 +32,9 @@ export function Footer({ lang }: { lang: Lang }) {
           <div className="cta-bloom"></div>
           <div className="cta-noise"></div>
           <h2>{t("cta.title")}</h2>
-          <a className="btn-white" href="#lead-form">
+          <SiteLink className="btn-white" to={routes.careers[lang]}>
             {t("cta.button")} <ArrowIcon />
-          </a>
+          </SiteLink>
         </div>
       </div>
       <div className="footer-inner">

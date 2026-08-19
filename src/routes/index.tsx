@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StaticPage } from "@/components/site/StaticPage";
+import { BlogHighlights } from "@/components/site/BlogHighlights";
+import { listPublicPosts } from "@/lib/blog.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,9 +14,17 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  loader: () => listPublicPosts(),
   component: Page,
 });
 
 function Page() {
-  return <StaticPage lang="vi" page="index" />;
+  const posts = Route.useLoaderData();
+  return (
+    <StaticPage
+      lang="vi"
+      page="index"
+      bottom={<BlogHighlights lang="vi" posts={posts} />}
+    />
+  );
 }
