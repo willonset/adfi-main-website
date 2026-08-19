@@ -54,7 +54,7 @@ export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
   );
 
   return (
-    <header className="site-header">
+    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="wrap-header">
         <SiteLink className="logo" to={routes.home[lang]}>
           <img src={assets.logoDark} alt="ADFI" />
