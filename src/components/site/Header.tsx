@@ -18,6 +18,14 @@ export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
   const t = makeT(lang);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
@@ -27,6 +35,7 @@ export function Header({ lang, dark = false }: { lang: Lang; dark?: boolean }) {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
 
   const isActive = (key: PageKey) => {
     const target = routes[key][lang];
