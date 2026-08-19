@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SiteLayout } from "./SiteLayout";
 import { StaticHtml, getPageContent } from "./StaticHtml";
 import { LeadForm } from "./LeadForm";
@@ -7,10 +8,12 @@ export function StaticPage({
   lang,
   page,
   role,
+  bottom,
 }: {
   lang: Lang;
   page: string;
   role?: string;
+  bottom?: ReactNode;
 }) {
   const { before, after } = getPageContent(lang, page);
   return (
@@ -18,6 +21,7 @@ export function StaticPage({
       <StaticHtml html={before} />
       <LeadForm lang={lang} defaultRole={role} />
       <StaticHtml html={after} />
+      {bottom}
     </SiteLayout>
   );
 }

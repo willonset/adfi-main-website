@@ -48,8 +48,8 @@ const vi: Dict = {
   "nav.blog": "Blog",
   "nav.contact": "Liên hệ",
 
-  "cta.title": "Ready to work with us ?",
-  "cta.button": "Bắt đầu ngay",
+  "cta.title": "Bạn muốn tham gia cùng ADFI?",
+  "cta.button": "Ứng tuyển ngay",
 
   "footer.tagline":
     "Hệ sinh thái Affiliate Marketing hàng đầu Đông Nam Á, giúp Marketplace - Brand - Advertiser - Creator tăng trưởng bền vững.",
@@ -139,8 +139,8 @@ const en: Dict = {
   "nav.blog": "Blog",
   "nav.contact": "Contact Us",
 
-  "cta.title": "Ready to work with us ?",
-  "cta.button": "Get Started",
+  "cta.title": "You wanna join ADFI team?",
+  "cta.button": "Apply now",
 
   "footer.tagline":
     "Southeast Asia's leading Affiliate Marketing ecosystem, helping Marketplaces, Brands, Advertisers and Creators grow sustainably.",
