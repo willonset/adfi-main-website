@@ -329,12 +329,12 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 /* Hero background = Rectangle 23819: red at top fading to white at ~47% (Figma 491:2).
    Sized over the full 1269px hero so the white heading/subtitle sit on the red→pink
    band before it turns white. */
-.about-hero { position: relative; overflow: hidden; min-height: 1269px;
+.about-hero { position: relative; overflow: hidden; min-height: 1100px;
   background: linear-gradient(180deg, #ec221f 2.2%, #ffffff 46.9%); }
 /* Map (Figma 552:306) is left-anchored and near full-width, so its dense mainland
    sits left and the sparse ocean/archipelago fills center-right — keeping the
    top-right text block clear. */
-.about-hero-map { position: absolute; left: 2.7%; top: 0; width: 97.3%;
+.about-hero-map { position: absolute; left: 4%; top: 24px; width: 84%;
   aspect-ratio: 1920 / 1670; height: auto; z-index: 1; }
 .about-hero .wrap { position: relative; z-index: 2; max-width: 1338px; padding-top: 137px; }
 .about-hero-copy { width: 700px; max-width: 100%; margin-left: auto; text-align: right; }
