@@ -335,7 +335,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
    sits left and the sparse ocean/archipelago fills center-right — keeping the
    top-right text block clear. */
 .about-hero-map { position: absolute; left: 2.7%; top: 0; width: 97.3%;
-  aspect-ratio: 1401 / 1248; height: auto; z-index: 1; }
+  aspect-ratio: 1440 / 1165; height: auto; z-index: 1; }
 .about-hero .wrap { position: relative; z-index: 2; max-width: 1338px; padding-top: 137px; }
 .about-hero-copy { width: 700px; max-width: 100%; margin-left: auto; text-align: right; }
 .about-hero-copy h1 { color: #fff; font-size: 60px; line-height: 60px; font-weight: 600; margin: 0; }
