@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ADFI — Hệ sinh thái Affiliate Marketing Đông Nam Á" },
+      { title: "ADFI" },
       {
         name: "description",
         content:
@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "ADFI" },
       { property: "og:site_name", content: "ADFI" },
       { property: "og:locale", content: "vi_VN" },
-      { property: "og:title", content: "ADFI — Hệ sinh thái Affiliate Marketing Đông Nam Á" },
+      { property: "og:title", content: "ADFI" },
       {
         property: "og:description",
         content:
@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "ADFI" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ADFI — Hệ sinh thái Affiliate Marketing Đông Nam Á" },
+      { name: "twitter:title", content: "ADFI" },
       {
         name: "twitter:description",
         content:
