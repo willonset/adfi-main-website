@@ -102,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://adfi.vn/og-adfi.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "ADFI" },
+      { property: "og:image:alt", content: "Bản đồ mạng lưới ADFI tại Đông Nam Á" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ADFI" },
       {
