@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "ADFI" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ADFI — Hệ sinh thái Affiliate Marketing Đông Nam Á" },
+      { name: "twitter:title", content: "ADFI" },
       {
         name: "twitter:description",
         content:
