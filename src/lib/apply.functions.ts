@@ -82,5 +82,22 @@ export const submitApplication = createServerFn({ method: "POST" })
       throw new Error("Could not save application");
     }
 
+    const { sendNotification, rowsToHtml } = await import("./notify.server");
+    await sendNotification({
+      subject: `[ADFI] Ứng viên mới: ${data.fullname} - ${data.position}`,
+      replyTo: data.email,
+      html: rowsToHtml("Hồ sơ ứng tuyển mới", [
+        ["Vị trí", data.position],
+        ["Họ tên", data.fullname],
+        ["Email", data.email],
+        ["Điện thoại", data.phone],
+        ["Giới thiệu", data.intro],
+        ["Nguồn", [...data.sources, data.sourceOther].filter(Boolean).join(", ")],
+        ["CV", data.cvFilename],
+        ["Thời gian", new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })],
+      ]),
+      attachments: [{ filename: data.cvFilename, content: data.cvBase64.replace(/\s/g, "") }],
+    });
+
     return { ok: true };
   });

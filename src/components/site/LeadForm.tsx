@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { type Lang, makeT } from "@/i18n";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/lead.functions";
 
 
 const LEAD_URL =
@@ -10,6 +11,7 @@ const ROLES = ["Marketplace", "Brand", "Advertiser", "Creator"];
 
 export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: string | undefined }) {
   const t = makeT(lang);
+  const sendLead = useServerFn(submitLead);
   const [role, setRole] = useState(defaultRole ?? "");
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<{ kind: "ok" | "err" | "info"; text: string } | null>(null);
@@ -34,16 +36,16 @@ export function LeadForm({ lang, defaultRole }: { lang: Lang; defaultRole?: stri
     setSending(true);
     setStatus({ kind: "info", text: t("form.sending") });
     try {
-      const { error } = await supabase.from("leads").insert({
-        role: payload.role,
-        name: payload.name,
-        phone: payload.phone,
-        email: payload.email,
-        message: payload.message,
-        lang,
-        source: "website",
+      await sendLead({
+        data: {
+          role: payload.role,
+          name: payload.name,
+          phone: payload.phone,
+          email: payload.email,
+          message: payload.message,
+          lang,
+        },
       });
-      if (error) throw error;
       // Keep the existing Google Sheet notification as a best-effort mirror.
       void fetch(LEAD_URL, {
         method: "POST",
