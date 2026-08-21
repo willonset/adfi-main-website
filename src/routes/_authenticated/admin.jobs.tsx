@@ -405,38 +405,31 @@ function JobsAdminPage() {
               />
             </div>
             <div className="admin-form-grid" style={{ marginTop: 14 }}>
-              <div className="admin-field">
-                <label>Yêu cầu (VI) — mỗi dòng một ý</label>
-                <textarea
-                  className="admin-textarea"
-                  value={toLines(draft.requirements_vi)}
-                  onChange={(e) => setDraft({ ...draft, requirements_vi: fromLines(e.target.value) })}
-                />
-              </div>
-              <div className="admin-field">
-                <label>Yêu cầu (EN)</label>
-                <textarea
-                  className="admin-textarea"
-                  value={toLines(draft.requirements_en)}
-                  onChange={(e) => setDraft({ ...draft, requirements_en: fromLines(e.target.value) })}
-                />
-              </div>
-              <div className="admin-field">
-                <label>Quyền lợi (VI)</label>
-                <textarea
-                  className="admin-textarea"
-                  value={toLines(draft.benefits_vi)}
-                  onChange={(e) => setDraft({ ...draft, benefits_vi: fromLines(e.target.value) })}
-                />
-              </div>
-              <div className="admin-field">
-                <label>Quyền lợi (EN)</label>
-                <textarea
-                  className="admin-textarea"
-                  value={toLines(draft.benefits_en)}
-                  onChange={(e) => setDraft({ ...draft, benefits_en: fromLines(e.target.value) })}
-                />
-              </div>
+              <LinesField
+                key={`req-vi-${draft.id ?? "new"}`}
+                label="Yêu cầu (VI) — mỗi dòng một ý"
+                value={draft.requirements_vi}
+                onChange={(lines) => setDraft((d) => (d ? { ...d, requirements_vi: lines } : d))}
+              />
+              <LinesField
+                key={`req-en-${draft.id ?? "new"}`}
+                label="Yêu cầu (EN)"
+                value={draft.requirements_en}
+                onChange={(lines) => setDraft((d) => (d ? { ...d, requirements_en: lines } : d))}
+              />
+              <LinesField
+                key={`ben-vi-${draft.id ?? "new"}`}
+                label="Quyền lợi (VI)"
+                value={draft.benefits_vi}
+                onChange={(lines) => setDraft((d) => (d ? { ...d, benefits_vi: lines } : d))}
+              />
+              <LinesField
+                key={`ben-en-${draft.id ?? "new"}`}
+                label="Quyền lợi (EN)"
+                value={draft.benefits_en}
+                onChange={(lines) => setDraft((d) => (d ? { ...d, benefits_en: lines } : d))}
+              />
+
             </div>
 
             {error ? <p className="admin-error">{error}</p> : null}
