@@ -66,6 +66,8 @@ export async function sendNotification(opts: {
       console.error(`[notify] send failed [${res.status}]: ${text}`);
       return { sent: false, error: `${res.status}: ${text}` };
     }
+    const payload = (await res.json().catch(() => ({}))) as { id?: string };
+    console.log(`[notify] sent ok id=${payload.id ?? "unknown"} subject=${opts.subject}`);
     return { sent: true };
   } catch (e) {
     console.error("[notify] send error", e);
