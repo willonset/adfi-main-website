@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "ADFI" },
       { property: "og:site_name", content: "ADFI" },
       { property: "og:locale", content: "vi_VN" },
-      { property: "og:title", content: "ADFI — Hệ sinh thái Affiliate Marketing Đông Nam Á" },
+      { property: "og:title", content: "ADFI" },
       {
         property: "og:description",
         content:
