@@ -82,6 +82,33 @@ const fromLines = (v: string) =>
     .map((s) => s.trim())
     .filter(Boolean);
 
+/** Textarea that keeps raw typed text (spaces/newlines) and only parses to lines on change. */
+function LinesField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string[];
+  onChange: (lines: string[]) => void;
+}) {
+  const [text, setText] = useState(() => toLines(value));
+  return (
+    <div className="admin-field">
+      <label>{label}</label>
+      <textarea
+        className="admin-textarea"
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+          onChange(fromLines(e.target.value));
+        }}
+      />
+    </div>
+  );
+}
+
+
 function JobsAdminPage() {
   const [rows, setRows] = useState<Job[] | null>(null);
   const [q, setQ] = useState("");
