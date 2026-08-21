@@ -33,6 +33,7 @@ import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authentica
 import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin.customers'
 import { Route as AuthenticatedAdminJobsRouteImport } from './routes/_authenticated/admin.jobs'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
+import { Route as ApiPublicEmailHealthRouteImport } from './routes/api/public/email-health'
 import { Route as EnBlogIndexRouteImport } from './routes/en.blog.index'
 import { Route as EnBlogSlugRouteImport } from './routes/en.blog.$slug'
 import { Route as ApiPublicBlogMediaSplatRouteImport } from './routes/api/public/blog-media.$'
@@ -158,6 +159,11 @@ const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
   path: '/admin/users',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicEmailHealthRoute = ApiPublicEmailHealthRouteImport.update({
+  id: '/api/public/email-health',
+  path: '/api/public/email-health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnBlogIndexRoute = EnBlogIndexRouteImport.update({
   id: '/en/blog/',
   path: '/en/blog/',
@@ -197,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/admin/jobs': typeof AuthenticatedAdminJobsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/api/public/email-health': typeof ApiPublicEmailHealthRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -225,6 +232,7 @@ export interface FileRoutesByTo {
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/admin/jobs': typeof AuthenticatedAdminJobsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/api/public/email-health': typeof ApiPublicEmailHealthRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/en/blog': typeof EnBlogIndexRoute
@@ -255,6 +263,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
   '/_authenticated/admin/jobs': typeof AuthenticatedAdminJobsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/api/public/email-health': typeof ApiPublicEmailHealthRoute
   '/en/blog/$slug': typeof EnBlogSlugRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/en/blog/': typeof EnBlogIndexRoute
@@ -285,6 +294,7 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/jobs'
     | '/admin/users'
+    | '/api/public/email-health'
     | '/en/blog/$slug'
     | '/admin/'
     | '/en/blog/'
@@ -313,6 +323,7 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/jobs'
     | '/admin/users'
+    | '/api/public/email-health'
     | '/en/blog/$slug'
     | '/admin'
     | '/en/blog'
@@ -342,6 +353,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/customers'
     | '/_authenticated/admin/jobs'
     | '/_authenticated/admin/users'
+    | '/api/public/email-health'
     | '/en/blog/$slug'
     | '/_authenticated/admin/'
     | '/en/blog/'
@@ -367,6 +379,7 @@ export interface RootRouteChildren {
   EnMarketplaceRoute: typeof EnMarketplaceRoute
   BlogIndexRoute: typeof BlogIndexRoute
   EnIndexRoute: typeof EnIndexRoute
+  ApiPublicEmailHealthRoute: typeof ApiPublicEmailHealthRoute
   EnBlogSlugRoute: typeof EnBlogSlugRoute
   EnBlogIndexRoute: typeof EnBlogIndexRoute
   ApiPublicBlogMediaSplatRoute: typeof ApiPublicBlogMediaSplatRoute
@@ -542,6 +555,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/email-health': {
+      id: '/api/public/email-health'
+      path: '/api/public/email-health'
+      fullPath: '/api/public/email-health'
+      preLoaderRoute: typeof ApiPublicEmailHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/blog/': {
       id: '/en/blog/'
       path: '/en/blog'
@@ -606,6 +626,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnMarketplaceRoute: EnMarketplaceRoute,
   BlogIndexRoute: BlogIndexRoute,
   EnIndexRoute: EnIndexRoute,
+  ApiPublicEmailHealthRoute: ApiPublicEmailHealthRoute,
   EnBlogSlugRoute: EnBlogSlugRoute,
   EnBlogIndexRoute: EnBlogIndexRoute,
   ApiPublicBlogMediaSplatRoute: ApiPublicBlogMediaSplatRoute,
