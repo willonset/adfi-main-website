@@ -41,7 +41,7 @@ type Job = {
 };
 
 const DEPARTMENTS = ["Sales", "Marketing", "Digital", "Logistic", "E-commerce", "Hành chính văn phòng"];
-const TYPES = ["Full-time", "Remote", "CTV"];
+const TYPES = ["Full-time", "Part-time", "Hybrid", "Remote"];
 
 const EMPTY: Job = {
   id: "",

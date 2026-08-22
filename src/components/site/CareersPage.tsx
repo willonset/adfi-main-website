@@ -22,7 +22,7 @@ const DEPARTMENT_EN: Record<string, string> = {
   "E-commerce": "E-commerce",
   "Hành chính văn phòng": "Office Administration",
 };
-const TYPES = ["Full-time", "Remote", "CTV"];
+const TYPES = ["Full-time", "Part-time", "Hybrid", "Remote"];
 
 type Job = {
   id: string;

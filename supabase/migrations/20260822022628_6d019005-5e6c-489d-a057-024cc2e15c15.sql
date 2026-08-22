@@ -1,0 +1,1 @@
+UPDATE public.jobs SET employment_type = 'Part-time' WHERE employment_type = 'CTV';
