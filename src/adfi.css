@@ -144,11 +144,20 @@ h1, h2, h3 { margin: 0; font-weight: 600; color: var(--ink-strong); }
 .stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
 .stat-card {
   background: var(--radial-card); color: #fff;
-  border-radius: 20px; padding: 32px; min-height: 280px;
-  display: flex; flex-direction: column; gap: 24px; text-align: center;
+  border-radius: 20px; padding: 32px 28px; min-height: 280px;
+  display: grid; grid-template-rows: auto 1fr; gap: 20px;
+  text-align: center; align-items: start; justify-items: center;
 }
-.stat-card .num { font-size: 36px; line-height: 40px; font-weight: 600; }
-.stat-card .desc { font-size: 16px; line-height: 24px; }
+.stat-card .num {
+  font-size: 36px; line-height: 40px; font-weight: 600;
+  min-height: 80px; display: flex; align-items: center; justify-content: center;
+  text-wrap: balance;
+}
+.stat-card .desc {
+  font-size: 16px; line-height: 24px; max-width: 26ch;
+  display: flex; align-items: center; justify-content: center;
+  text-wrap: pretty;
+}
 
 /* ---------- Why-affiliate stat grid ---------- */
 .why-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
