@@ -106,7 +106,7 @@ export function Footer({ lang }: { lang: Lang }) {
             <div className="footer-col">
               <h4>{t("footer.contact")}</h4>
               <ul>
-                <li>(+84) 123 456 789</li>
+                <li>(+84) 989 166 975</li>
                 <li>contact@adfi.vn</li>
                 <li>Imperia Garden Nguyễn Tuân, Thanh Xuân, Hà Nội</li>
               </ul>
